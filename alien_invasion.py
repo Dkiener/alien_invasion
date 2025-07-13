@@ -28,7 +28,7 @@ class AlienInvasion:
         # Game Loop
         while self.running:
             self._check_events()
-            
+            self.ship.update()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
 
@@ -40,8 +40,29 @@ class AlienInvasion:
     def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.running = False
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_events(event)
+
+    def _check_keyup_events(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        if event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+
+    def _check_keydown_events(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        if event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+        if event.key == pygame.K_q:
+            self.running = False
+            pygame.quit()
+            sys.exit()
 
 if __name__ == '__main__':
     ai = AlienInvasion()
