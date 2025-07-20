@@ -59,7 +59,9 @@ class Settings:
         # Alien dimensions
         self.alien_w = 40
         self.alien_h = 40
-        # Alien movement speed
+        # Alien fleet x movement speed
         self.fleet_speed = 2
         # Starting direction of the alien fleet (1 for right -1 for left)
         self.fleet_direction = 1
+        # Alien fleet y movement speed
+        self.fleet_drop_speed = 40
