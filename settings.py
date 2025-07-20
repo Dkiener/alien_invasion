@@ -56,5 +56,8 @@ class Settings:
 
         # Alien sprite
         self.alien_file = Path.cwd() / 'Assets' / 'Images' / 'enemy_4.png'
+        # Alien dimensions
+        self.alien_w = 40
+        self.alien_h = 40
         # Alien movement speed
         self.fleet_speed = 5
