@@ -61,3 +61,5 @@ class Settings:
         self.alien_h = 40
         # Alien movement speed
         self.fleet_speed = 2
+        # Starting direction of the alien fleet (1 for right -1 for left)
+        self.fleet_direction = 1
