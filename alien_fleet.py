@@ -24,7 +24,8 @@ class AlienFleet:
         fleet_w, fleet_h = self.calculate_fleet_size(alien_w, screen_w, alien_h, screen_h)
         x_offset, y_offset = self.calculate_offsets(alien_w, alien_h, screen_w, fleet_w, fleet_h)
 
-        self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
+        # self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
+        self._create_staggered_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
 
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
         for row in range(fleet_h):
@@ -34,6 +35,18 @@ class AlienFleet:
                 if col % 2 == 0 or row % 2 == 0:
                     continue
                 self._create_alien(current_x, curreny_y)
+
+    def _create_staggered_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
+        columns = fleet_w // 2
+        rows = fleet_h // 2
+
+        for row in range(rows):
+            for col in range(columns):
+                # Offset odd rows to stagger
+                offset_x = alien_w // 2 if row % 2 == 1 else 0
+                current_x = col * alien_w * 2 + offset_x + x_offset  # skip every other column space
+                current_y = row * alien_h * 2 + y_offset              # vertical spacing between rows
+                self._create_alien(current_x, current_y)
 
     def calculate_offsets(self, alien_w, alien_h, screen_w, fleet_w, fleet_h):
         half_screen = self.settings.screen_h // 2
@@ -60,9 +73,8 @@ class AlienFleet:
         return int(fleet_w), int(fleet_h)
     
     
-    def _create_alien(self, current_x: int, curreny_y: int):
-        new_alien = Alien(self, current_x, curreny_y)
-
+    def _create_alien(self, current_x: int, current_y: int):
+        new_alien = Alien(self, current_x, current_y)
         self.fleet.add(new_alien)
 
     def _check_fleet_edges(self):
