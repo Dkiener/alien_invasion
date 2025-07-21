@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 class Alien(Sprite):
     def __init__(self, fleet: 'AlienFleet', x: float, y: float) -> None:
         super().__init__()
+        self.fleet = fleet
         self.screen = fleet.game.screen
         self.boundaries = fleet.game.screen.get_rect()
         self.settings = fleet.game.settings
@@ -27,14 +28,11 @@ class Alien(Sprite):
     def update(self) -> None:
         speed = self.settings.fleet_speed
 
-        if self.check_edges():
-            self.settings.fleet_direction *= -1
-            self.y += self.settings.fleet_drop_speed
-        self.x += speed * self.settings.fleet_direction
+        self.x += speed * self.fleet.fleet_direction
         self.rect.x = int(self.x)
         self.rect.y = int(self.y)
 
-    def check_edges(self):
+    def check_edges(self) -> bool:
         return (self.rect.right >= self.boundaries.right or self.rect.left <= self.boundaries.left)
 
     def draw_alien(self) -> None:
