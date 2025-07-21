@@ -42,8 +42,12 @@ class Settings:
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'laserBolt.png'
         # Bullet sound
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'blaster.mp3'
+        # Impact Sound
+        self.impact_sound = Path.cwd() / 'Assets' / 'sound' / 'impactSound.mp3'
         # Bullet sound volume
         self.laser_volume = 0.7
+        # Impact sound volume
+        self.impact_volume = 0.7
         # Bullet speed
         self.bullet_speed = 7
         # Bullet dimensions
