@@ -35,6 +35,8 @@ class Settings:
         self.ship_h = 70
         # Ship movement speed
         self.ship_speed = 5
+        # Starting ship count (lives)
+        self.starting_ship_count = 3
 
         # Bullet Settings:
 
