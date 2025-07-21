@@ -1,3 +1,14 @@
+"""
+
+Alien
+
+David Kiener
+07-20-2025
+
+Contains class to handle individual Aliens.
+
+"""
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING

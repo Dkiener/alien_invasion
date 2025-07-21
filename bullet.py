@@ -1,3 +1,14 @@
+"""
+
+Alien Fleet
+
+David Kiener
+07-20-2025
+
+Contains class to handle ship laser.
+
+"""
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING

@@ -1,5 +1,3 @@
-from pathlib import Path
-
 """
 
 Alien Invasion Settings
@@ -10,6 +8,8 @@ David Kiener
 This file contains settings for the Alien Invasion game.
 
 """
+
+from pathlib import Path
 
 class Settings:
     def __init__(self) -> None:

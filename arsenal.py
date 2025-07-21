@@ -1,3 +1,14 @@
+"""
+
+Arsenal
+
+David Kiener
+07-20-2025
+
+Contains class to handle ship weapons.
+
+"""
+
 import pygame
 from typing import TYPE_CHECKING
 from bullet import Bullet

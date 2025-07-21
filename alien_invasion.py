@@ -1,3 +1,14 @@
+"""
+
+Alien Invasion Game
+
+David Kiener
+07-20-2025
+
+A Galaga-type game made using Star Wars fighters.
+
+"""
+
 import sys
 import pygame
 from settings import Settings

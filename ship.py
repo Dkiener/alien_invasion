@@ -1,3 +1,14 @@
+"""
+
+Alien Fleet
+
+David Kiener
+07-20-2025
+
+Contains class to handle player ship.
+
+"""
+
 import pygame
 from typing import TYPE_CHECKING
 
