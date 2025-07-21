@@ -29,7 +29,7 @@ class Settings:
         # Ship Settings:
 
         # Ship sprite
-        self.ship_file = Path.cwd() / 'Assets' / 'images' / 'xwing.png'
+        self.ship_file = Path.cwd() / 'Assets' / 'images' / 'xWing.png'
         # Ship dimensions
         self.ship_w = 60
         self.ship_h = 70
@@ -45,11 +45,11 @@ class Settings:
         # Bullet sound
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'blaster.mp3'
         # Impact Sound
-        self.impact_sound = Path.cwd() / 'Assets' / 'sound' / 'impactSound.mp3'
+        self.impact_sound = Path.cwd() / 'Assets' / 'sound' / 'tieExplosion.mp3'
         # Bullet sound volume
         self.laser_volume = 0.7
         # Impact sound volume
-        self.impact_volume = 0.7
+        self.impact_volume = 0.5
         # Bullet speed
         self.bullet_speed = 7
         # Bullet dimensions
@@ -61,7 +61,7 @@ class Settings:
         # Alien settings:
 
         # Alien sprite
-        self.alien_file = Path.cwd() / 'Assets' / 'Images' / 'enemy_4.png'
+        self.alien_file = Path.cwd() / 'Assets' / 'Images' / 'tieFighter.png'
         # Alien dimensions
         self.alien_w = 40
         self.alien_h = 40
