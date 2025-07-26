@@ -58,7 +58,7 @@ class Settings:
         # Max number of bullets allowed on the screen at once
         self.bullet_amount = 5
 
-        # Alien settings:
+        # Alien Settings:
 
         # Alien sprite
         self.alien_file = Path.cwd() / 'Assets' / 'Images' / 'tieFighter.png'
@@ -71,3 +71,26 @@ class Settings:
         self.fleet_direction = 1
         # Alien fleet y movement speed
         self.fleet_drop_speed = 40
+
+        # Start Button Settings:
+
+        # Button dimensions
+        self.button_w = 200
+        self.button_h = 50
+        # Button color
+        self.button_color = (27, 36, 230)
+        # Button text size
+        self.button_font_size = 48
+        # Button text color
+        self.button_text_color = (255, 255, 255)
+        # Button font file
+        self.button_font_file = Path.cwd() / 'Assets' / 'Fonts' / 'StarJedi' / 'StarJedi.ttf'
+        
+        # HUD Settings:
+
+        # HUD text color
+        self.HUD_text_color = (255, 255, 255)
+        # HUD font size
+        self.HUD_font_size = 24
+         # HUD font file
+        self.HUD_font_file = Path.cwd() / 'Assets' / 'Fonts' / 'StarJedi' / 'StarJedi.ttf'
