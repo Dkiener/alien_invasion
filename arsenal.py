@@ -3,9 +3,9 @@
 Arsenal
 
 David Kiener
-07-20-2025
+07-27-2025
 
-Contains class to handle ship weapons.
+Manages the player's active projectiles, including firing, updating, and removing off-screen bullets.
 
 """
 
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 class Arsenal:
     def __init__(self, game: 'AlienInvasion') -> None:
-        # Reference to main game, settings, and screen
+        # Reference to game settings and screen
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -27,23 +27,23 @@ class Arsenal:
         self.arsenal = pygame.sprite.Group()
 
     def update_aresnal(self) -> None:
-        # Update position of bullets and remove offscreen ones
+        # Update bullet positions and remove off-screen bullets
         self.arsenal.update()
         self._remove_bullets_offscreen()
 
     def _remove_bullets_offscreen(self) -> None:
-        # Remove bullets that have moved off the top of the screen
+        # Remove bullets that have moved beyond the top edge of the screen
         for bullet in self.arsenal.copy():
             if bullet.rect.bottom <= 0:
                 self.arsenal.remove(bullet)
 
     def draw(self) -> None:
-        # Draw each bullet in the arsenal
+        # Draw all bullets in the arsenal to the screen
         for bullet in self.arsenal:
             bullet.draw_bullet()
 
     def fire_bullet(self) -> bool:
-        # Fire a bullet if under bullet limit
+        # Fire a new bullet if under the allowed bullet limit
         if len(self.arsenal) < self.settings.bullet_amount:
             new_bullet = Bullet(self.game)
             self.arsenal.add(new_bullet)

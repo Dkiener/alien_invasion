@@ -1,11 +1,11 @@
 """
 
-Alien Fleet
+Ship
 
 David Kiener
-07-20-2025
+07-27-2025
 
-Contains class to handle player ship.
+Defines the player-controlled ship, including movement, firing, and collision behavior.
 
 """
 
@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 class Ship:
     
     def __init__(self, game: 'AlienInvasion', arsenal: 'Arsenal') -> None:
-        # Reference to the game instance, settings, and screen
+        # Reference to game, settings, and screen
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -31,7 +31,7 @@ class Ship:
             (self.settings.ship_w, self.settings.ship_h)
         )
 
-        # Get rectangle for positioning and center the ship
+        # Get rect and center ship at the start
         self.rect = self.image.get_rect()
         self._center_ship()
 
@@ -39,21 +39,21 @@ class Ship:
         self.moving_right = False
         self.moving_left = False
 
-        # Arsenal for handling bullets fired from the ship
+        # Bullet manager for this ship
         self.arsenal = arsenal
 
     def _center_ship(self):
         # Position the ship at the bottom center of the screen
         self.rect.midbottom = self.boundaries.midbottom
-        self.x = float(self.rect.x)  # Use float for smoother movement
+        self.x = float(self.rect.x)  # Use float for sub-pixel accuracy
 
     def update(self):
-        # Update ship position and update bullets
+        # Update ship position and bullets
         self._update_ship_movement()
         self.arsenal.update_aresnal()
 
     def _update_ship_movement(self):
-        # Move the ship left or right, respecting screen boundaries
+        # Move ship within screen bounds based on input
         speed = self.settings.ship_speed
 
         if self.moving_right and self.rect.right < self.boundaries.right:
@@ -65,17 +65,17 @@ class Ship:
         self.rect.x = int(self.x)
 
     def draw(self) -> None:
-        # Draw bullets and the ship
+        # Draw bullets first, then the ship
         self.arsenal.draw()
         self.screen.blit(self.image, self.rect)
 
     def fire(self) -> bool:
-        # Attempt to fire a bullet
+        # Fire a bullet using the arsenal
         return self.arsenal.fire_bullet()
 
     def check_collisions(self, other_group) -> bool:
-        # Check if the ship has collided with any sprite in the other group
-        if pygame.sprite.spritecollideany(self, other_group): # type: ignore
-            self._center_ship()  # Re-center the ship on collision
+        # Check for collision with any sprite in other_group
+        if pygame.sprite.spritecollideany(self, other_group):  # type: ignore
+            self._center_ship()  # Reset position if hit
             return True
         return False
