@@ -26,6 +26,9 @@ class Settings:
         # Background image
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'bg.png'
 
+        # The amount multiplied to increase difficulty per level
+        self.difficulty_scale = 1.1
+
         # Ship Settings:
 
         # Ship sprite
@@ -33,10 +36,6 @@ class Settings:
         # Ship dimensions
         self.ship_w = 60
         self.ship_h = 70
-        # Ship movement speed
-        self.ship_speed = 5
-        # Starting ship count (lives)
-        self.starting_ship_count = 3
 
         # Bullet Settings:
 
@@ -50,13 +49,6 @@ class Settings:
         self.laser_volume = 0.7
         # Impact sound volume
         self.impact_volume = 0.5
-        # Bullet speed
-        self.bullet_speed = 7
-        # Bullet dimensions
-        self.bullet_w = 80
-        self.bullet_h = 80
-        # Max number of bullets allowed on the screen at once
-        self.bullet_amount = 5
 
         # Alien Settings:
 
@@ -65,12 +57,8 @@ class Settings:
         # Alien dimensions
         self.alien_w = 40
         self.alien_h = 40
-        # Alien fleet x movement speed
-        self.fleet_speed = 2
         # Starting direction of the alien fleet (1 for right -1 for left)
         self.fleet_direction = 1
-        # Alien fleet y movement speed
-        self.fleet_drop_speed = 40
 
         # Start Button Settings:
 
@@ -94,3 +82,33 @@ class Settings:
         self.HUD_font_size = 24
          # HUD font file
         self.HUD_font_file = Path.cwd() / 'Assets' / 'Fonts' / 'StarJedi' / 'StarJedi.ttf'
+
+    def initialize_dynamic_settings(self):
+        # Dynamic Ship Settings:
+
+        # Ship movement speed
+        self.ship_speed = 5
+        # Starting ship count (lives)
+        self.starting_ship_count = 3
+
+        # Dynamic Bullet Settings:
+
+        # Bullet speed
+        self.bullet_speed = 7
+        # Max number of bullets allowed on the screen at once
+        self.bullet_amount = 5
+        # Bullet dimensions
+        self.bullet_w = 80
+        self.bullet_h = 80
+
+        # Dynamic Alien Settings:
+
+        # Alien fleet x movement speed
+        self.fleet_speed = 2
+        # Alien fleet y movement speed
+        self.fleet_drop_speed = 40
+
+    def increase_difficulty(self):
+        self.ship_speed *= self.difficulty_scale
+        self.bullet_speed *= self.difficulty_scale
+        self.fleet_speed *= self.difficulty_scale
