@@ -88,6 +88,7 @@ class AlienInvasion:
         # If all aliens destroyed, reset level
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
+            self.settings.increase_difficulty()
 
     def _check_game_status(self):
         # Handle losing a ship or ending the game
@@ -100,6 +101,7 @@ class AlienInvasion:
 
     def _reset_level(self):
         # Reset bullets and aliens for a new level
+        self.settings.initialize_dynamic_settings()
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()
