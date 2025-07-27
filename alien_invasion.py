@@ -56,6 +56,10 @@ class AlienInvasion:
         self.impact_sound = pygame.mixer.Sound(self.settings.impact_sound)
         self.impact_sound.set_volume(self.settings.impact_volume)
 
+        # Load music and set volume
+        pygame.mixer.music.load(self.settings.bg_music)
+        pygame.mixer.music.set_volume(self.settings.music_volume)
+
         # Create game objects
         self.ship = Ship(self, Arsenal(self))
         self.alien_fleet = AlienFleet(self)
@@ -108,6 +112,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.game_active = False
+            pygame.mixer.music.stop()
 
     def _reset_level(self) -> None:
         # Clear bullets and aliens, recreate fleet
@@ -125,6 +130,8 @@ class AlienInvasion:
         self.HUD.update_level()
         self.game_active = True
         pygame.mouse.set_visible(False)
+        pygame.mixer.music.play(-1)
+
 
     def _update_screen(self) -> None:
         # Draw background and all game elements
@@ -182,6 +189,7 @@ class AlienInvasion:
             # Quit game with Q
             self.running = False
             self.game_stats.save_scores()
+            pygame.mixer.music.stop()
             pygame.quit()
             sys.exit()
 
