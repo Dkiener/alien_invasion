@@ -25,6 +25,8 @@ class Settings:
         self.FPS = 60
         # Background image
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'bg.png'
+        # High scores file
+        self.scores_file = Path.cwd() / 'Assets' / 'file' / 'scores.json'
 
         # The amount multiplied to increase difficulty per level
         self.difficulty_scale = 1.1
