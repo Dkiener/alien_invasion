@@ -46,7 +46,7 @@ class HUD:
         # Load and scale ship image for life indicators
         self.life_image = pygame.image.load(self.settings.ship_file)
         self.life_image = pygame.transform.scale(
-            self.life_image, (self.settings.ship_w, self.settings.ship_h)
+            self.life_image, (self.settings.ship_w / 2, self.settings.ship_h / 2)
         )
         self.life_rect = self.life_image.get_rect()
 
@@ -79,23 +79,24 @@ class HUD:
         self.hi_score_rect = self.hi_score_image.get_rect()
         self.hi_score_rect.midtop = (self.boundaries.centerx, self.padding)
 
+    def _draw_lives(self):
+        # Draw remaining ships as life icons in the bottom-left corner
+        current_x = self.padding
+        current_y = self.boundaries.bottom - self.life_rect.height - self.padding
+        for _ in range(self.game_stats.ships_left):
+            self.screen.blit(self.life_image, (current_x, current_y))
+            current_x += self.life_rect.width + self.padding
+
     def update_level(self):
-        # Update level text and position
+        # Update level text and position (moved to top-left)
         level_str = f"Level: {self.game_stats.level: ,.0f}"
         self.level_image = self.font.render(
             level_str, True, self.settings.HUD_text_color, None
         )
         self.level_rect = self.level_image.get_rect()
         self.level_rect.left = self.padding
-        self.level_rect.top = self.life_rect.bottom + self.padding
+        self.level_rect.top = self.padding
 
-    def _draw_lives(self):
-        # Draw remaining ships as life icons
-        current_x = self.padding
-        current_y = self.padding
-        for _ in range(self.game_stats.ships_left):
-            self.screen.blit(self.life_image, (current_x, current_y))
-            current_x += self.life_rect.width + self.padding
 
     def draw(self):
         # Draw all HUD elements
