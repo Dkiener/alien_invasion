@@ -107,6 +107,8 @@ class Settings:
         self.fleet_speed = 2
         # Alien fleet y movement speed
         self.fleet_drop_speed = 40
+        # Number of points recieved when alien ship is destroyed
+        self.alien_points = 50
 
     def increase_difficulty(self):
         self.ship_speed *= self.difficulty_scale

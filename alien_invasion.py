@@ -27,7 +27,7 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
-        self.game_stats = GameStats(self.settings.starting_ship_count)
+        self.game_stats = GameStats(self)
 
         # Set up screen and window caption
         self.screen = pygame.display.set_mode(
@@ -84,13 +84,15 @@ class AlienInvasion:
         if collisions:
             self.impact_sound.play()
             self.impact_sound.fadeout(500)
+            self.game_stats.update(collisions)
 
         # If all aliens destroyed, reset level
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
             self.settings.increase_difficulty()
+            self.game_stats.update_level()
 
-    def _check_game_status(self):
+    def _check_game_status(self) -> None:
         # Handle losing a ship or ending the game
         if self.game_stats.ships_left > 0:
             self.game_stats.ships_left -= 1
@@ -99,20 +101,21 @@ class AlienInvasion:
         else:
             self.game_active = False
 
-    def _reset_level(self):
+    def _reset_level(self) -> None:
         # Reset bullets and aliens for a new level
-        self.settings.initialize_dynamic_settings()
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()
 
-    def _restart_game(self):
+    def _restart_game(self) -> None:
+        self.settings.initialize_dynamic_settings()
+        self.game_stats.reset_stats()
         self._reset_level()
         self.ship._center_ship()
         self.game_active = True
         pygame.mouse.set_visible(True)
 
-    def _update_screen(self):
+    def _update_screen(self) -> None:
         # Redraw everything on the screen
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
@@ -124,7 +127,7 @@ class AlienInvasion:
 
         pygame.display.flip()
 
-    def _check_events(self):
+    def _check_events(self) -> None:
         # Handle user input events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
