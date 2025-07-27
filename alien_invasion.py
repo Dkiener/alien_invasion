@@ -94,6 +94,7 @@ class AlienInvasion:
             self._reset_level()
             self.settings.increase_difficulty()
             self.game_stats.update_level()
+            self.HUD.update_level()
 
     def _check_game_status(self) -> None:
         # Handle losing a ship or ending the game
@@ -116,8 +117,9 @@ class AlienInvasion:
         self.HUD.update_scores()
         self._reset_level()
         self.ship._center_ship()
+        self.HUD.update_level()
         self.game_active = True
-        pygame.mouse.set_visible(True)
+        pygame.mouse.set_visible(False)
 
     def _update_screen(self) -> None:
         # Redraw everything on the screen
