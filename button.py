@@ -13,11 +13,13 @@ import pygame.font
 from typing import TYPE_CHECKING
 
 class Button:
+    """A simple UI button that displays text and can be clicked."""
 
     if TYPE_CHECKING:
         from alien_invasion import AlienInvasion
 
     def __init__(self, game: 'AlienInvasion', msg) -> None:
+        """Initialize the button's position, size, and label."""
         # Reference to game settings and display
         self.game = game
         self.screen = game.screen
@@ -39,16 +41,19 @@ class Button:
         self._prep_msg(msg)
 
     def _prep_msg(self, msg):
+        """Render the button label text as an image."""
         # Render the text image and center it on the button
         self.msg_image = self.font.render(msg, True, self.settings.button_text_color, None)
         self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center
 
     def draw(self):
+        """Draw the button and its label to the screen."""
         # Draw the button with text on the screen
         self.screen.fill(self.settings.button_color, self.rect)
         self.screen.blit(self.msg_image, self.msg_image_rect)
 
     def check_clicked(self, mouse_pos):
+        """Return True if the given mouse position is inside the button."""
         # Return True if the given position collides with the button
         return self.rect.collidepoint(mouse_pos)

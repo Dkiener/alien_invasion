@@ -31,13 +31,14 @@ Sound:
 
 """
 
-
-
 from pathlib import Path
 
 class Settings:
-    def __init__(self) -> None:
+    """A class to store all settings and constants for the game."""
 
+    def __init__(self) -> None:
+        """Initialize static game settings."""
+        
         # ====================
         # General Game Settings
         # ====================
@@ -135,6 +136,8 @@ class Settings:
         self.HUD_font_file = Path.cwd() / 'Assets' / 'Fonts' / 'StarJedi' / 'StarJedi.ttf'
 
     def initialize_dynamic_settings(self):
+        """Initialize settings that change throughout the game."""
+        
         # ======================
         # Dynamic Ship Settings
         # ======================
@@ -173,6 +176,7 @@ class Settings:
         self.alien_points = 50
 
     def increase_difficulty(self):
+        """Increase speeds to scale game difficulty."""
         # Increase speeds to scale difficulty
         self.ship_speed *= self.difficulty_scale
         self.bullet_speed *= self.difficulty_scale
